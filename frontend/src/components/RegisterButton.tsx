@@ -5,7 +5,8 @@ interface RegisterButtonProps {
   title?: string; // Optional title prop
   buttonCol?: string; // Optional button color prop (e.g., "yellow-400")
   textCol?: string; // Optional text color prop (e.g., "yellow-400")
-  onClick?: () => void; // Optional onClick handler
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onClick?: any // Updated onClick to accept event
 }
 
 function RegisterButton({
@@ -24,7 +25,10 @@ function RegisterButton({
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick} // Optional: additional onClick handler
+      onClick={(e) => {
+        e.preventDefault(); // Prevent default form behavior if needed
+        if (onClick) onClick(e); // Call onClick if it exists and pass the event
+      }} // Handle the click event properly
     >
       {/* Button Text */}
       <span

@@ -1,4 +1,4 @@
-const host = "http://localhost:8001";
+const host = "https://justabackend.onrender.com";
 // const host = "https://expense-tracker-app-knl1.onrender.com";
 // // const host = "http://localhost:5000";
 
