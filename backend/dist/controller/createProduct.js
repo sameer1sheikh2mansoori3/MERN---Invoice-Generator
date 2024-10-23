@@ -20,6 +20,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const user = req.user;
         const product = yield productModel_1.Product.create({ productName, productNumber, quantity });
         user === null || user === void 0 ? void 0 : user.productArray.push(product._id);
+        yield (user === null || user === void 0 ? void 0 : user.save());
         const resPonse = new ApiResponse_1.ApiResponse(200, user, "product added successfully");
         return res.status(200).json(resPonse);
     }

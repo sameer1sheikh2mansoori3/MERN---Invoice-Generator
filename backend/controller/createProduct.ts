@@ -20,6 +20,7 @@ export const createProduct = async (
     user?.productArray.push(
       product._id
     )
+    await user?.save()
     const resPonse = new ApiResponse(200, user, "product added successfully");
     return res.status(200).json(resPonse);
   } catch (error) {

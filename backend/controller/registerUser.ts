@@ -9,22 +9,24 @@ const registerUser = async (req: Request, res: Response): Promise<any> => {
         const { username, email, password } = req.body;
 
         const findUser = await User.findOne(
-            { email , username }
+            { email }
         )
-        console.log(findUser)
-        if (findUser) {
+        console.log(findUser , "my find user")
+        if ( findUser ) {
             
             const findRes = new ApiResponse(409, findUser, "user with this email is already exist")
             return res.status(409).json(
                 findRes
             )
+            
         }
         const createdUser = await User.create({
             username,
             email,
             password
         })
-        const userId = createdUser?._id.toString() || ""
+        const userId:any  = createdUser._id?.toString()
+        console.log(userId , "my userId")
         const token = jwt.sign(userId, 'secret')
         const apiResponse = new ApiResponse(200, {
             data: token

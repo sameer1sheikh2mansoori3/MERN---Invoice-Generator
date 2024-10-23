@@ -1,28 +1,35 @@
-import express, { Express, NextFunction, Request, Response } from 'express'
-import { ApiResponse } from './utils/ApiResponse';
-import { ApiError } from './utils/ApiError';
-import { register } from 'module';
-import { registerUser } from './controller/registerUser';
-import userRouter from './routes/userRoutes'
-import productRouter from './routes/productRoutes'
+import express, { Express, Request, Response } from 'express';
+import cors from 'cors';
+import userRouter from './routes/userRoutes';
+import productRouter from './routes/productRoutes';
 
 const app: Express = express();
 
-app.use(express.json({ limit: "16kb" }))
-app.use('/api/v1/user' , userRouter);
-app.use('/api/v1/product' , productRouter);
+// Define allowed origins (without the trailing slash)
+const allowedOrigins = [
+    "http://localhost:5173",  // No trailing slash
+      // No trailing slash
+    // Add more allowed origins here
+];
 
+// CORS middleware should be configured before routes
+app.use(cors({
+    origin: allowedOrigins,  // Allow specified origins
+    credentials: true,       // Allow cookies or HTTP authentication
+    methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed methods
+}));
 
+// Body parser middleware
+app.use(express.json({ limit: "16kb" }));
 
+// Define your routes after CORS middleware
+app.use('/api/v1/user', userRouter);
+app.use('/api/v1/product', productRouter);
 
+// Example route for testing
 app.get('/', (req: Request, res: Response) => {
-    const { username, email, password } = req.body.json()
-    res.send('hi there')
-})
+    res.send('hi there');
+});
 
-
-
-
-
-
-export {app};
+// Export the app
+export { app };

@@ -18,10 +18,11 @@ const ApiError_1 = require("../utils/ApiError");
 const userModel_1 = require("../models/userModel");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const { username, email, password } = req.body;
-        const findUser = yield userModel_1.User.findOne({ email, username });
-        console.log(findUser);
+        const findUser = yield userModel_1.User.findOne({ email });
+        console.log(findUser, "my find user");
         if (findUser) {
             const findRes = new ApiResponse_1.ApiResponse(409, findUser, "user with this email is already exist");
             return res.status(409).json(findRes);
@@ -31,7 +32,8 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             email,
             password
         });
-        const userId = (createdUser === null || createdUser === void 0 ? void 0 : createdUser._id.toString()) || "";
+        const userId = (_a = createdUser._id) === null || _a === void 0 ? void 0 : _a.toString();
+        console.log(userId, "my userId");
         const token = jsonwebtoken_1.default.sign(userId, 'secret');
         const apiResponse = new ApiResponse_1.ApiResponse(200, {
             data: token

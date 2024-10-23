@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 import {IProduct} from '../models/productModel'
-interface IUser {
+interface IUser extends Document {
+    
     username: string;
     email: string;
     password: string;

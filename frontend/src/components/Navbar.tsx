@@ -4,7 +4,7 @@ import LogButton from './LogButton';
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 p-4 transition-all duration-300 bg-gray-400 bg-opacity-70">
+    <nav className="fixed top-0 left-0 right-0 z-50 p-4 transition-all duration-300 bg-gray-500 bg-opacity-20">
       <div className="container flex items-center justify-between mx-auto">
         {/* Left Section: Logo and Name */}
         <div className="flex items-center">
