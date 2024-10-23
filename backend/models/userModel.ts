@@ -1,17 +1,14 @@
 import mongoose from "mongoose";
 
-
+import {IProduct} from '../models/productModel'
 interface IUser {
     username: string;
     email: string;
     password: string;
     productArray : IProduct[]
 }
-interface IProduct {
-    productName: string;
-    quantity: number;
-    productNumber: number;
-}
+
+
 
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -23,23 +20,15 @@ const userSchema = new mongoose.Schema<IUser>({
     },
     password: {
         type: String
-    }
+    },
+    productArray:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Product'
+    }]
 
 })
 const User = mongoose.model<IUser>('User', userSchema);
 
-const productSchema = new mongoose.Schema<IProduct>(
-    {
-        productName:{
-            type:String
-        },
-         productNumber:{
-            type:Number
-         },
-         quantity:{
-            type:Number
-         }
-    }
 
-)
-export { User , productSchema };
+
+export { User ,IUser  };

@@ -14,7 +14,11 @@ const userSchema = new mongoose_1.default.Schema({
     },
     password: {
         type: String
-    }
+    },
+    productArray: [{
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: 'Product'
+        }]
 });
 const User = mongoose_1.default.model('User', userSchema);
 exports.User = User;
